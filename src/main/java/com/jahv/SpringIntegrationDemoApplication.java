@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.GenericMessage;
 
 @SpringBootApplication
 @Configuration
@@ -19,6 +21,11 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments applicationArguments) throws Exception {
-		System.out.println("Hello World");
+		//System.out.println("Hello World");
+
+		//Using GenericMessage for creating a message
+		Message message = new GenericMessage("Hello World");
+		PrintService printService = new PrintService();
+		printService.print(message);
 	}
 }
