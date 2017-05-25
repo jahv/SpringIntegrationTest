@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.GenericMessage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication
 @Configuration
@@ -23,8 +27,12 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 	public void run(ApplicationArguments applicationArguments) throws Exception {
 		//System.out.println("Hello World");
 
+		Map<String, Object> headers = new HashMap();
+		headers.put("key", "value");
+		MessageHeaders messageHeaders = new MessageHeaders(headers);
+
 		//Using GenericMessage for creating a message
-		Message message = new GenericMessage("Hello World");
+		Message message = new GenericMessage("Hello World", headers);
 		PrintService printService = new PrintService();
 		printService.print(message);
 	}
