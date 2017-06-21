@@ -19,7 +19,7 @@ import org.springframework.messaging.support.MessageBuilder;
 public class SpringIntegrationDemoApplication implements ApplicationRunner {
 
     @Autowired
-    private DirectChannel channel;
+    private DirectChannel messageChannel;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringIntegrationDemoApplication.class, args);
@@ -31,7 +31,7 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 
 	    //Message handler is subscribed to the channel
         //When the channel sends messages they'll be managed by this handler
-	    channel.subscribe(new MessageHandler() {
+		messageChannel.subscribe(new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
                 System.out.println("FROM MESSAGE HANDLER");
@@ -45,6 +45,6 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 				.setHeader("newKey", "newValue")
 				.build();
 
-		channel.send(message);
+		messageChannel.send(message);
 	}
 }

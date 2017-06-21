@@ -2,12 +2,11 @@ package com.jahv;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-/**
- * Created by teamp on 5/25/17.
- */
+@Component
 public class PrintService {
 
     public void print(Message<String> message) {
