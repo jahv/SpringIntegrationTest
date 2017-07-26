@@ -15,15 +15,16 @@ import org.springframework.messaging.support.MessageBuilder;
 
 @SpringBootApplication
 @Configuration
-@ImportResource("integration-context.xml")
+//@ImportResource("integration-context.xml")
 public class SpringIntegrationDemoApplication implements ApplicationRunner {
-
-    @Autowired
-    private DirectChannel messageChannel;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringIntegrationDemoApplication.class, args);
 	}
+
+	@Autowired
+	private DirectChannel inputChannel;
+    //private DirectChannel messageChannel;
 
 
 	@Override
@@ -31,13 +32,13 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 
 	    //Message handler is subscribed to the channel
         //When the channel sends messages they'll be managed by this handler
-		messageChannel.subscribe(new MessageHandler() {
-            @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
-                System.out.println("FROM MESSAGE HANDLER");
-                new PrintService().print((Message<String>) message);
-            }
-        });
+//		inputChannel.subscribe(new MessageHandler() {
+//            @Override
+//            public void handleMessage(Message<?> message) throws MessagingException {
+//                System.out.println("FROM MESSAGE HANDLER");
+//                new PrintService().print((Message<String>) message);
+//            }
+//        });
 
 		//Using MessageBuilder
 		Message<String> message = MessageBuilder
@@ -45,6 +46,6 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 				.setHeader("newKey", "newValue")
 				.build();
 
-		messageChannel.send(message);
+        inputChannel.send(message);
 	}
 }
