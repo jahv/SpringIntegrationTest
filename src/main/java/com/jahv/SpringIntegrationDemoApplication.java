@@ -26,20 +26,12 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 	private DirectChannel inputChannel;
     //private DirectChannel messageChannel;
 
+	@Autowired
+	private DirectChannel outputChannel;
+
 
 	@Override
 	public void run(ApplicationArguments applicationArguments) throws Exception {
-
-	    //Message handler is subscribed to the channel
-        //When the channel sends messages they'll be managed by this handler
-//		inputChannel.subscribe(new MessageHandler() {
-//            @Override
-//            public void handleMessage(Message<?> message) throws MessagingException {
-//                System.out.println("FROM MESSAGE HANDLER");
-//                new PrintService().print((Message<String>) message);
-//            }
-//        });
-
 		//Using MessageBuilder
 		Message<String> message = MessageBuilder
 				.withPayload("Hello world")

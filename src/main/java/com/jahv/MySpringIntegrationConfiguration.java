@@ -9,7 +9,9 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
+import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 
 @Configuration
 @EnableIntegration
@@ -34,10 +36,24 @@ public class MySpringIntegrationConfiguration {
     public IntegrationFlow printMessage() {
         return IntegrationFlows
                 .from(inputChannel())
-                .handle(message -> {
-                    LOGGER.info("Handle the message");
+                .wireTap(flow -> flow.handle(message -> {
+                    LOGGER.info("Input Channel :: Handle the message");
                     printService.print((Message<String>) message);
+                }))
+                .channel(outputChannel())
+                .get();
+    }
+
+    @Bean
+    public IntegrationFlow outMessage() {
+        return IntegrationFlows
+                .from(outputChannel())
+                .handle(message -> {
+                    LOGGER.info("Output Channel :: Handle the message");
+                    System.out.println(message.getPayload());
                 })
                 .get();
     }
+
+
 }
