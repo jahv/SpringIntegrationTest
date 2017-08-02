@@ -11,5 +11,5 @@ import java.util.concurrent.Future;
 public interface PrinterGateway {
 
     //Future is to deal with concurrency
-    public Future<Message<String>> print(Message<?> message);
+    Future<Message<String>> print(Message<?> message);
 }

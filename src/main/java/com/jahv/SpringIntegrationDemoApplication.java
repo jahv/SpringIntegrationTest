@@ -6,13 +6,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.core.MessagingTemplate;
+import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
-import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +28,7 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 	public void run(ApplicationArguments applicationArguments) throws Exception {
         List<Future<Message<String>>> futures = new ArrayList<>();
         for(int i=0; i<10; i++) {
-            Message<String> message = MessageBuilder.withPayload("Message " + i).setHeader("messageNumber", i).build();
+            Message<String> message = MessageBuilder.withPayload("Message " + i).setHeader("messageNumber", i).setPriority(i).build();
             System.out.println("Sending message " + i);
             futures.add(this.printerGateway.print(message));
         }
