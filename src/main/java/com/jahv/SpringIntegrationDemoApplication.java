@@ -14,6 +14,10 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.MessageBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+
 @SpringBootApplication
 @Configuration
 public class SpringIntegrationDemoApplication implements ApplicationRunner {
@@ -23,22 +27,20 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 	}
 
 	@Autowired
-	private DirectChannel inputChannel;
-
-//	@Autowired
-//	private DirectChannel outputChannel;
-
+	private PrinterGateway printerGateway;
 
 	@Override
 	public void run(ApplicationArguments applicationArguments) throws Exception {
-		Message<String> message = MessageBuilder
-				.withPayload("Hello world")
-				.setHeader("newKey", "newValue")
-				.build();
+        List<Future<Message<String>>> futures = new ArrayList<>();
+        for(int i=0; i<10; i++) {
+            Message<String> message = MessageBuilder.withPayload("Message " + i).setHeader("messageNumber", i).build();
+            System.out.println("Sending message " + i);
+            futures.add(this.printerGateway.print(message));
+        }
 
-        MessagingTemplate template = new MessagingTemplate();
-        Message returnMessage = template.sendAndReceive(inputChannel, message);
-        System.out.println(returnMessage.getPayload());
+        for(Future<Message<String>> future : futures) {
+            System.out.println(future.get().getPayload());
+        }
 
 	}
 }
