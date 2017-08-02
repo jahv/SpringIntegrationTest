@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.core.MessagingTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
@@ -15,7 +16,6 @@ import org.springframework.messaging.support.MessageBuilder;
 
 @SpringBootApplication
 @Configuration
-//@ImportResource("integration-context.xml")
 public class SpringIntegrationDemoApplication implements ApplicationRunner {
 
 	public static void main(String[] args) {
@@ -24,20 +24,21 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 
 	@Autowired
 	private DirectChannel inputChannel;
-    //private DirectChannel messageChannel;
 
-	@Autowired
-	private DirectChannel outputChannel;
+//	@Autowired
+//	private DirectChannel outputChannel;
 
 
 	@Override
 	public void run(ApplicationArguments applicationArguments) throws Exception {
-		//Using MessageBuilder
 		Message<String> message = MessageBuilder
 				.withPayload("Hello world")
 				.setHeader("newKey", "newValue")
 				.build();
 
-        inputChannel.send(message);
+        MessagingTemplate template = new MessagingTemplate();
+        Message returnMessage = template.sendAndReceive(inputChannel, message);
+        System.out.println(returnMessage.getPayload());
+
 	}
 }

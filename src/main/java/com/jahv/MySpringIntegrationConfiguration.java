@@ -27,33 +27,33 @@ public class MySpringIntegrationConfiguration {
         return new DirectChannel();
     }
 
-    @Bean
-    public DirectChannel outputChannel() {
-        return new DirectChannel();
-    }
+//    @Bean
+//    public DirectChannel outputChannel() {
+//        return new DirectChannel();
+//    }
 
     @Bean
     public IntegrationFlow printMessage() {
         return IntegrationFlows
                 .from(inputChannel())
-                .wireTap(flow -> flow.handle(message -> {
+                .handle(message -> {
                     LOGGER.info("Input Channel :: Handle the message");
                     printService.print((Message<String>) message);
-                }))
-                .channel(outputChannel())
+                })
+//                .channel(outputChannel())
                 .get();
     }
 
-    @Bean
-    public IntegrationFlow outMessage() {
-        return IntegrationFlows
-                .from(outputChannel())
-                .handle(message -> {
-                    LOGGER.info("Output Channel :: Handle the message");
-                    System.out.println(message.getPayload());
-                })
-                .get();
-    }
+//    @Bean
+//    public IntegrationFlow outMessage() {
+//        return IntegrationFlows
+//                .from(outputChannel())
+//                .handle(message -> {
+//                    LOGGER.info("Output Channel :: Handle the message");
+//                    System.out.println(message.getPayload());
+//                })
+//                .get();
+//    }
 
 
 }
