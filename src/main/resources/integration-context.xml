@@ -12,9 +12,9 @@
     <!--<int:channel id="inputChannel"/>-->
     <!--<int:channel id="outputChannel"/>-->
 
-    <!--<int:service-activator ref="printService" method="print"-->
-                           <!--input-channel="inputChannel" output-channel="outputChannel" />-->
+    <int:service-activator ref="printService" method="print"
+                           input-channel="inputChannel" output-channel="outputChannel" />
 
-    <int:service-activator ref="printService" method="print" input-channel="inputChannel" />
+    <!--<int:service-activator ref="printService" method="print" input-channel="inputChannel" />-->
 
 </beans>

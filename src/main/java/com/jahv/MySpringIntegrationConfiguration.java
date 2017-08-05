@@ -29,6 +29,11 @@ public class MySpringIntegrationConfiguration {
         return MessageChannels.direct().get();
     }
 
+    @Bean
+    public DirectChannel outputChannel() {
+        return MessageChannels.direct().get();
+    }
+
 
 //    @Bean
 //    public IntegrationFlow printMessage() {
