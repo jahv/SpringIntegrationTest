@@ -20,7 +20,7 @@
                            <!--input-channel="inputChannel" output-channel="outputChannel" />-->
 
     <int:service-activator ref="printService" method="print" input-channel="inputChannel">
-        <int:poller fixed-rate="5" time-unit="SECONDS" max-messages-per-poll="2" />
+        <int:poller fixed-rate="3" time-unit="SECONDS" max-messages-per-poll="2" />
     </int:service-activator>
 
 </beans>

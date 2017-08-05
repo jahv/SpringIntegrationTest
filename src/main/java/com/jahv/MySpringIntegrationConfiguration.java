@@ -14,7 +14,10 @@ import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.scheduling.PollerMetadata;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+
+import java.util.Comparator;
 
 @Configuration
 @EnableIntegration
@@ -25,14 +28,22 @@ public class MySpringIntegrationConfiguration {
     @Autowired
     PrintService printService;
 
+    @Autowired
+    Comparator<Message<?>> customMessageComparator;
+
 //    @Bean
 //    public DirectChannel inputChannel() {
 //        return MessageChannels.direct().get();
 //    }
 
+//    @Bean
+//    public QueueChannel inputChannel() {
+//        return MessageChannels.queue().get();
+//    }
+
     @Bean
     public QueueChannel inputChannel() {
-        return MessageChannels.queue().get();
+        return MessageChannels.priority().setComparator(customMessageComparator).setCapacity(10).get();
     }
 
 //    @Bean

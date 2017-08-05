@@ -57,6 +57,7 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 			Message<String> message = MessageBuilder
 					.withPayload("Message " + i)
 					.setHeader("messageNumber", i)
+//					.setPriority(i)
 					.build();
 			System.out.println("Sending message " + i);
 			futures.add(this.gateway.print(message));
