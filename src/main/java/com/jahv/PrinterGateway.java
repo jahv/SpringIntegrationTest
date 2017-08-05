@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Future;
 
-@Component
-@MessagingGateway(defaultRequestChannel = "inputChannel")
+//@Component
+//@MessagingGateway(defaultRequestChannel = "inputChannel")
 public interface PrinterGateway {
 
     //Future is to deal with concurrency

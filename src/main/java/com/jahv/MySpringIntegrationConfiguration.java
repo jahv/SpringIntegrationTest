@@ -24,15 +24,15 @@ public class MySpringIntegrationConfiguration {
     @Autowired
     PrintService printService;
 
-    @Bean
-    public DirectChannel inputChannel() {
-        return MessageChannels.direct().get();
-    }
+//    @Bean
+//    public DirectChannel inputChannel() {
+//        return MessageChannels.direct().get();
+//    }
 
-    @Bean
-    public DirectChannel outputChannel() {
-        return MessageChannels.direct().get();
-    }
+//    @Bean
+//    public DirectChannel outputChannel() {
+//        return MessageChannels.direct().get();
+//    }
 
 
 //    @Bean
