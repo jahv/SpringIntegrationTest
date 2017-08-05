@@ -9,12 +9,12 @@
 
     <context:component-scan base-package="com" />
 
-    <int:channel id="inputChannel">
-        <int:queue capacity="10" />
-    </int:channel>
+    <!--<int:channel id="inputChannel">-->
+        <!--<int:queue capacity="10" />-->
+    <!--</int:channel>-->
     <!--<int:channel id="outputChannel"/>-->
 
-    <int:gateway id="gateway" service-interface="com.jahv.PrinterGateway" default-request-channel="inputChannel" />
+    <!--<int:gateway id="gateway" service-interface="com.jahv.PrinterGateway" default-request-channel="inputChannel" />-->
 
     <!--<int:service-activator ref="printService" method="print"-->
                            <!--input-channel="inputChannel" output-channel="outputChannel" />-->
