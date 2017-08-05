@@ -33,7 +33,7 @@ public class MySpringIntegrationConfiguration {
 
     @Bean
     public DirectChannel inputChannel() {
-        return MessageChannels.direct().get();
+        return MessageChannels.direct().failover(true).get();
     }
 
 //    @Bean
