@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrintService {
 
-    public Message print(Message<String> message) {
+    public Message<?> print(Message<String> message) {
         System.out.println(message.getPayload());
-        int messageNumber = (int) message.getHeaders().get("messageNumber");
-        return MessageBuilder.withPayload("Sending a reply for message " + messageNumber).build();
+        //int messageNumber = (int) message.getHeaders().get("messageNumber");
+        return MessageBuilder.withPayload("Sending a reply for message ").build();
     }
 }
