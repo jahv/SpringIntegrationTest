@@ -23,6 +23,6 @@
         <!--<int:poller fixed-rate="3" time-unit="SECONDS" max-messages-per-poll="2" />-->
     <!--</int:service-activator>-->
 
-    <int:service-activator order="2" ref="printService" method="print" input-channel="inputChannel" />
-    <int:service-activator order="1" ref="uppercasePrintService" method="print" input-channel="inputChannel" />
+    <!--<int:service-activator order="2" ref="printService" method="print" input-channel="inputChannel" />-->
+    <!--<int:service-activator order="1" ref="uppercasePrintService" method="print" input-channel="inputChannel" />-->
 </beans>

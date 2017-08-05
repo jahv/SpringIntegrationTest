@@ -28,6 +28,9 @@ public class MySpringIntegrationConfiguration {
     @Autowired
     PrintService printService;
 
+    @Autowired
+    UppercasePrintService uppercasePrintService;
+
 //    @Autowired
 //    Comparator<Message<?>> customMessageComparator;
 
@@ -52,15 +55,25 @@ public class MySpringIntegrationConfiguration {
 //    }
 
 
-//    @Bean
-//    public IntegrationFlow printMessage() {
-//        return IntegrationFlows
-//                .from(inputChannel())
-//                .handle(message -> {
-//                    printService.print((Message<String>) message);
-//                }, e -> e.poller(Pollers.fixedRate(3000).maxMessagesPerPoll(2).get()))
-//                .get();
-//    }
+    @Bean
+    public IntegrationFlow printMessage() {
+        return IntegrationFlows
+                .from(inputChannel())
+                .handle(message -> {
+                    printService.print((Message<String>) message);
+                })
+                .get();
+    }
+
+    @Bean
+    public IntegrationFlow printMessageUppercase() {
+        return IntegrationFlows
+                .from(inputChannel())
+                .handle(message -> {
+                    uppercasePrintService.print((Message<String>) message);
+                })
+                .get();
+    }
 
 
 }
