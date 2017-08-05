@@ -58,7 +58,7 @@ public class MySpringIntegrationConfiguration {
 //                .from(inputChannel())
 //                .handle(message -> {
 //                    printService.print((Message<String>) message);
-//                }, e -> e.poller(poller()))
+//                }, e -> e.poller(Pollers.fixedRate(3000).maxMessagesPerPoll(2).get()))
 //                .get();
 //    }
 
