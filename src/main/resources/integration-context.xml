@@ -19,8 +19,10 @@
     <!--<int:service-activator ref="printService" method="print"-->
                            <!--input-channel="inputChannel" output-channel="outputChannel" />-->
 
-    <int:service-activator ref="printService" method="print" input-channel="inputChannel">
-        <int:poller fixed-rate="3" time-unit="SECONDS" max-messages-per-poll="2" />
-    </int:service-activator>
+    <!--<int:service-activator ref="printService" method="print" input-channel="inputChannel">-->
+        <!--<int:poller fixed-rate="3" time-unit="SECONDS" max-messages-per-poll="2" />-->
+    <!--</int:service-activator>-->
 
+    <int:service-activator ref="printService" method="print" input-channel="inputChannel" />
+    <int:service-activator ref="uppercasePrintService" method="print" input-channel="inputChannel" />
 </beans>

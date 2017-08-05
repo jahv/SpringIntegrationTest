@@ -28,23 +28,23 @@ public class MySpringIntegrationConfiguration {
     @Autowired
     PrintService printService;
 
-    @Autowired
-    Comparator<Message<?>> customMessageComparator;
+//    @Autowired
+//    Comparator<Message<?>> customMessageComparator;
 
-//    @Bean
-//    public DirectChannel inputChannel() {
-//        return MessageChannels.direct().get();
-//    }
+    @Bean
+    public DirectChannel inputChannel() {
+        return MessageChannels.direct().get();
+    }
 
 //    @Bean
 //    public QueueChannel inputChannel() {
 //        return MessageChannels.queue().get();
 //    }
 
-    @Bean
-    public QueueChannel inputChannel() {
-        return MessageChannels.priority().setComparator(customMessageComparator).setCapacity(10).get();
-    }
+//    @Bean
+//    public QueueChannel inputChannel() {
+//        return MessageChannels.priority().setComparator(customMessageComparator).setCapacity(10).get();
+//    }
 
 //    @Bean
 //    public DirectChannel outputChannel() {

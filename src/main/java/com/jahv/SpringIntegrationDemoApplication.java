@@ -51,21 +51,15 @@ public class SpringIntegrationDemoApplication implements ApplicationRunner {
 //		Message returnMessage = template.sendAndReceive(inputChannel, message);
 //		System.out.println(returnMessage.getPayload());
 
-		List<Future<Message<String>>> futures = new ArrayList<>();
-
+//		List<Future<Message<String>>> futures = new ArrayList<>();
+//
 		for(int i=0; i<10; i++) {
 			Message<String> message = MessageBuilder
-					.withPayload("Message " + i)
-					.setHeader("messageNumber", i)
-//					.setPriority(i)
-					.build();
+					.withPayload("Message " + i).build();
 			System.out.println("Sending message " + i);
-			futures.add(this.gateway.print(message));
+			this.gateway.print(message);
 		}
 
-		for(Future<Message<String>> future : futures) {
-			System.out.println(future.get().getPayload());
-		}
 	}
 
 //	private void subscribe() {
